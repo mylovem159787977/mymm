@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ওয়েবসাইটের টাইটেল -->
+    <title>তোমার জন্য আমার ভালোবাসা ❤️ | For My Favorite Person</title>
+    
+    <!-- Tailwind CSS লোড করা হচ্ছে -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- বাংলা ও ইংরেজি রোমান্টিক ফন্ট -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 35%, #f8bbd0 70%, #f3e5f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #4a1525;
+        }
+
+        .font-romantic {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* গ্লাস-মরফিজম কার্ড ডিজাইন */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(219, 39, 119, 0.12);
+        }
+
+        /* ভাসমান হার্ট অ্যানিমেশন */
+        .floating-heart {
+            position: fixed;
+            bottom: -10vh;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp linear forwards;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-115vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* কার্ড ফ্লিপ অ্যানিমেশন */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            color: white;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.12); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.18); }
+        }
+        .animate-heartbeat {
+            animation: heartbeat 1.8s infinite;
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #db2777;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="relative selection:bg-pink-300 selection:text-pink-900">
+
+    <!-- ব্যাকগ্রাউন্ড ভাসমান হার্ট -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <!-- ১. প্রবেশদ্বার / এনভেলপ স্ক্রিন -->
+    <div id="entrance-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-pink-100 via-rose-200 to-purple-200 transition-opacity duration-700">
+        <div class="glass-card max-w-md w-full rounded-3xl p-8 text-center shadow-2xl border-2 border-white/90">
+            <div class="text-6xl mb-4 animate-heartbeat">💌</div>
+            <p class="font-romantic text-2xl text-pink-600 mb-1">A Special Delivery</p>
+            
+            <h1 class="text-2xl sm:text-3xl font-bold text-rose-900 mb-3">
+                প্রিয় <span class="text-pink-600">জান</span>, তোমার জন্য...
+            </h1>
+            
+            <p class="text-rose-700/90 text-base mb-8 leading-relaxed">
+                আমার মনের ভেতরের কিছু না বলা কথা আর ভালোবাসা তোমার জন্য সাজিয়ে রেখেছি।
+            </p>
+            
+            <button id="open-heart-btn" class="w-full py-4 px-6 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-semibold text-lg shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transform hover:-translate-y-0.5 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                <span>আমার হৃদয় খুলে দেখো</span>
+                <span class="text-xl">❤️</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ২. মূল ওয়েবসাইট কন্টেন্ট -->
+    <main id="main-content" class="hidden relative z-10 max-w-4xl mx-auto px-4 py-12 sm:py-16 space-y-20">
+
+        <!-- হিরো সেকশন -->
+        <section class="text-center space-y-6 pt-4 fade-in">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-white/70 border border-pink-200 text-pink-700 text-sm font-medium shadow-sm">
+                ✨ For My Favorite Person ✨
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-700 via-pink-600 to-purple-700 leading-tight">
+                তোমার জন্য আমার ভালোবাসা
+            </h1>
+            
+            <p class="font-romantic text-2xl sm:text-3xl text-rose-600">
+                Every love story is beautiful, but ours is my favorite.
+            </p>
+
+            <div class="glass-card max-w-2xl mx-auto rounded-2xl p-6 sm:p-8 mt-6">
+                <p id="typing-text" class="text-lg sm:text-xl text-rose-900 font-medium min-h-[4rem] leading-relaxed typing-cursor"></p>
+            </div>
+        </section>
+
+        <!-- ৩. তোমাকে ভালোবাসার কারণগুলো (Flip Cards) -->
+        <section class="space-y-8 fade-in">
+            <div class="text-center space-y-2">
+                <h2 class="text-3xl sm:text-4xl font-bold text-rose-900">তোমাকে ভালোবাসার কারণগুলো</h2>
+                <p class="text-rose-700/80 text-sm sm:text-base">কার্ডগুলোতে ক্লিক বা ট্যাপ করে মনের কথাগুলো পড়ে নাও 💕</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- কার্ড ১ -->
+                <div class="flip-card h-56" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-3">😊</span>
+                            <h3 class="text-xl font-bold text-rose-800">কারণ #১</h3>
+                            <p class="text-sm text-pink-600 mt-1">ট্যাপ করে দেখো...</p>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <p class="text-lg font-medium leading-relaxed">
+                                "তোমার ওই মিষ্টি হাসিটা দেখলে আমার সারাদিনের সব ক্লান্তি এক নিমেষেই দূর হয়ে যায়।"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+                <!-- কার্ড ২  -->
+                <div class="flip-card h-56" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-3">✨</span>
+                            <h3 class="text-xl font-bold text-rose-800">কারণ #৩</h3>
+                            <p class="text-sm text-pink-600 mt-1">ট্যাপ করে দেখো...</p>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <p class="text-lg font-medium leading-relaxed">
+                                "তোমার সাথে থাকলে আমি কোনো ভণিতা ছাড়াই নিজের মতো থাকতে পারি। তুমি আমার সবচেয়ে নিরাপদ আশ্রয়।"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- কার্ড ৩ -->
+                <div class="flip-card h-56" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-3">👀</span>
+                            <h3 class="text-xl font-bold text-rose-800">কারণ #৪</h3>
+                            <p class="text-sm text-pink-600 mt-1">ট্যাপ করে দেখো...</p>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <p class="text-lg font-medium leading-relaxed">
+                                "তোমার চোখের দিকে তাকালে আমি আমার পুরো পৃথিবীটাকে খুঁজে পাই।"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- কার্ড ৪ -->
+                <div class="flip-card h-56" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-3">🌹</span>
+                            <h3 class="text-xl font-bold text-rose-800">কারণ #৫</h3>
+                            <p class="text-sm text-pink-600 mt-1">ট্যাপ করে দেখো...</p>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <p class="text-lg font-medium leading-relaxed">
+                                "তুমি আমার ভালোবাসা ।"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- কার্ড ৫ -->
+                <div class="flip-card h-56" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front glass-card">
+                            <span class="text-4xl mb-3">♾️</span>
+                            <h3 class="text-xl font-bold text-rose-800">কারণ #৬</h3>
+                            <p class="text-sm text-pink-600 mt-1">ট্যাপ করে দেখো...</p>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <p class="text-lg font-medium leading-relaxed">
+                                "love you "
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ফুটার -->
+        <footer class="text-center text-rose-700/70 text-sm pb-8 pt-4">
+            <p>Made with ❤️ specially for you</p>
+            <p class="mt-1 font-medium">ইতি, তোমার প্রিয় মানুষ</p>
+        </footer>
+
+    </main>
+
+    <!-- জাভাস্ক্রিপ্ট -->
+    <script>
+        // ব্যাকগ্রাউন্ড ভাসমান হার্ট
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartSymbols = ['❤️', '💖', '💕', '🌸', '✨', '💗'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 18 + 14) + 'px';
+                const duration = Math.random() * 6 + 6;
+                heart.style.animationDuration = duration + 's';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, duration * 1000);
+            }, 600);
+        }
+
+        createFloatingHearts();
+
+        const entranceScreen = document.getElementById('entrance-screen');
+        const mainContent = document.getElementById('main-content');
+        const openHeartBtn = document.getElementById('open-heart-btn');
+
+        openHeartBtn.addEventListener('click', () => {
+            entranceScreen.style.opacity = '0';
+            setTimeout(() => {
+                entranceScreen.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                startTypingEffect();
+            }, 700);
+        });
+
+        const romanticQuote = "পৃথিবীর হাজারো মানুষের ভিড়ে আমার চোখ শুধু তোমাকেই খোঁজে। তুমি আমার প্রতিদিনের হাসির কারণ, আমার শান্তির ঠিকানা। অনেক ভালোবাসি তোমায়! ❤️";
+        let charIndex = 0;
+
+        function startTypingEffect() {
+            const typingElement = document.getElementById('typing-text');
+            if (charIndex < romanticQuote.length) {
+                typingElement.innerHTML += romanticQuote.charAt(charIndex);
+                charIndex++;
+                setTimeout(startTypingEffect, 55);
+            }
+        }
+    </script>
+</body>
+</html>
